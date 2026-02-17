@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soporte Skool</title>
+
+  <!-- Estilos del chat n8n -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      background: #f6f7fb;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 0.2px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Soporte Skool</h1>
+
+  <!-- Script del chat n8n -->
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'https://n8n-n8n.3asuar.easypanel.host/webhook/f2a876f5-b691-4fcf-aaa6-4c42ca0739f2/chat',
+
+      title: 'hola👋',
+
+      initialMessages: [
+        'Hola, soy tu asistente de Skool ¿Cómo puedo ayudarte?'
+      ]
+    });
+  </script>
+</body>
+</html>
