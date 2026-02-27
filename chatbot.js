@@ -1,5 +1,5 @@
 const WEBHOOK_URL =
-  "https://n8n-n8n.3asuar.easypanel.host/webhook/d220a64c-e44f-40b6-b54f-fc6dfef2ebf3/chat";
+  "https://n8n-n8n.3asuar.easypanel.host/webhook/62ba236b-15fb-4594-ae54-1db15e359e8a/chat";
 
 document.addEventListener("DOMContentLoaded", () => {
   const chatToggle = document.getElementById("chat-toggle");
