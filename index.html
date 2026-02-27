@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atención al cliente | Chatbot Skool</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="logo">
+        <span class="logo-mark">S</span>
+        <span class="logo-text">Soporte Skool</span>
+      </div>
+      <nav class="main-nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Cómo te ayudamos</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="container hero-content">
+        <div class="hero-text">
+          <h1>Estamos aquí para ayudarte</h1>
+          <p>
+            Resolvemos tus dudas sobre Skool de forma rápida y cercana.
+            Escríbenos por chat cuando lo necesites.
+          </p>
+          <div class="hero-actions">
+            <button id="open-chat-cta" class="btn btn-primary">
+              Hablar con soporte
+            </button>
+            <p class="hero-note">Atención disponible 24/7 mediante nuestro asistente.</p>
+          </div>
+        </div>
+        <div class="hero-illustration">
+          <div class="hero-card">
+            <h2>Soporte al alumno</h2>
+            <ul>
+              <li>Acceso a cursos y comunidad</li>
+              <li>Pagos y facturación</li>
+              <li>Problemas técnicos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios" class="benefits">
+      <div class="container">
+        <h2>¿Cómo te ayudamos?</h2>
+        <p class="section-subtitle">
+          Nuestro equipo y asistente virtual están preparados para acompañarte en todo momento.
+        </p>
+        <div class="benefit-grid">
+          <article class="benefit-card">
+            <h3>Respuesta rápida</h3>
+            <p>
+              Recibe ayuda en minutos gracias a la integración directa con nuestro chatbot.
+            </p>
+          </article>
+          <article class="benefit-card">
+            <h3>Soporte personalizado</h3>
+            <p>
+              Cuéntanos tu situación y adaptamos la respuesta a tu caso concreto.
+            </p>
+          </article>
+          <article class="benefit-card">
+            <h3>Disponible en todo momento</h3>
+            <p>
+              Accede al chat tanto desde ordenador como desde móvil, sin instalaciones.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="contact">
+      <div class="container contact-content">
+        <div>
+          <h2>¿Prefieres otro canal?</h2>
+          <p>
+            Si lo prefieres, también puedes escribirnos directamente por correo.
+          </p>
+          <p class="contact-email">
+            Correo de soporte:
+            <a href="mailto:soporte@tusitio.com">soporte@tusitio.com</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>© <span id="current-year"></span> Soporte Skool. Todos los derechos reservados.</p>
+      <div class="footer-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante del chat -->
+  <button id="chat-toggle" class="chat-toggle" aria-label="Abrir chat de soporte">
+    <span class="chat-toggle-icon">?</span>
+  </button>
+
+  <!-- Widget de chat -->
+  <section
+    id="chat-widget"
+    class="chat-widget"
+    aria-label="Chat de atención al cliente"
+    aria-hidden="true"
+  >
+    <header class="chat-header">
+      <div class="chat-header-text">
+        <h2>Asistente de soporte</h2>
+        <p>Responde a tus preguntas sobre Skool.</p>
+      </div>
+      <button
+        id="chat-close"
+        class="chat-close-button"
+        aria-label="Cerrar chat de soporte"
+      >
+        ×
+      </button>
+    </header>
+
+    <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
+
+    <form id="chat-form" class="chat-form" autocomplete="off">
+      <label class="visually-hidden" for="chat-input">Escribe tu mensaje</label>
+      <input
+        id="chat-input"
+        class="chat-input"
+        type="text"
+        name="message"
+        placeholder="Escribe tu mensaje..."
+        required
+      />
+      <button type="submit" class="btn btn-primary chat-submit">
+        Enviar
+      </button>
+    </form>
+  </section>
+
+  <script src="chatbot.js"></script>
+</body>
+</html>
+
