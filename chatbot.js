@@ -1,5 +1,4 @@
-const WEBHOOK_URL =
-  "https://n8n-n8n.3asuar.easypanel.host/webhook/d220a64c-e44f-40b6-b54f-fc6dfef2ebf3/chat";
+const WEBHOOK_URL = "https://n8n-n8n.3asuar.easypanel.host/webhook/b32afa63-5bea-414f-b5cf-f9706f5b0a21/chat";
 
 document.addEventListener("DOMContentLoaded", () => {
   const chatToggle = document.getElementById("chat-toggle");
@@ -121,18 +120,22 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(`Error HTTP: ${response.status}`);
       }
 
-      let data = {};
-      try {
-        data = await response.json();
-      } catch (e) {
-        data = {};
-      }
+      const contentType = response.headers.get("Content-Type") || "";
+      let replyText = "Gracias, hemos recibido tu mensaje.";
 
-      const replyText =
-        data.reply ||
-        data.message ||
-        data.text ||
-        "Gracias, hemos recibido tu mensaje.";
+      if (contentType.includes("application/json")) {
+        const data = await response.json();
+        replyText =
+          data.reply ??
+          data.message ??
+          data.text ??
+          data.output ??
+          (data.body && (typeof data.body === "string" ? data.body : data.body?.message || data.body?.reply)) ??
+          replyText;
+      } else {
+        const text = await response.text();
+        if (text && text.trim()) replyText = text.trim();
+      }
 
       addMessage(replyText, "bot");
     } catch (error) {
