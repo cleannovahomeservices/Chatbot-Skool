@@ -1,4 +1,14 @@
-const WEBHOOK_URL = "https://n8n-n8n.3asuar.easypanel.host/webhook/d220a64c-e44f-40b6-b54f-fc6dfef2ebf3/chat";
+const WEBHOOK_URL = "https://n8n-n8n.3asuar.easypanel.host/webhook/b32afa63-5bea-414f-b5cf-f9706f5b0a21/chat";
+
+function extractReply(data) {
+  if (data == null) return "";
+  if (typeof data === "string") return data;
+  if (Array.isArray(data)) return extractReply(data[0]?.json ?? data[0]);
+  if (typeof data === "object") {
+    return data.output || data.reply || data.text || data.message || data.response || JSON.stringify(data);
+  }
+  return String(data);
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const chatToggle = document.getElementById("chat-toggle");
@@ -13,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (currentYearEl) {
     currentYearEl.textContent = String(new Date().getFullYear());
   }
+
+  const sessionId = (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
 
   const state = {
     isOpen: false,
@@ -110,10 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const response = await fetch(WEBHOOK_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: text }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text, sessionId }),
       });
 
       if (!response.ok) {
@@ -121,22 +131,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const contentType = response.headers.get("Content-Type") || "";
-      let replyText = "Gracias, hemos recibido tu mensaje.";
-
-      if (contentType.includes("application/json")) {
-        const data = await response.json();
-        replyText =
-          data.reply ??
-          data.message ??
-          data.text ??
-          data.output ??
-          (data.body && (typeof data.body === "string" ? data.body : data.body?.message || data.body?.reply)) ??
-          replyText;
-      } else {
-        const text = await response.text();
-        if (text && text.trim()) replyText = text.trim();
-      }
-
+      const data = contentType.includes("application/json")
+        ? await response.json()
+        : await response.text();
+      const replyText = extractReply(data) || "Gracias, hemos recibido tu mensaje.";
       addMessage(replyText, "bot");
     } catch (error) {
       console.error("Error enviando mensaje al webhook:", error);
