@@ -1,4 +1,4 @@
-const WEBHOOK_URL = "https://n8n-n8n.3asuar.easypanel.host/webhook/d220a64c-e44f-40b6-b54f-fc6dfef2ebf3/chat";
+const WEBHOOK_URL = "https://n8n-n8n.3asuar.easypanel.host/webhook/b32afa63-5bea-414f-b5cf-f9706f5b0a21/chat";
 
 function extractReply(data) {
   if (data == null) return "";
